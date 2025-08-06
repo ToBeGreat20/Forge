@@ -1,0 +1,346 @@
+/* 🍎 SEXY APPLE INTELLIGENCE LLM UI - BUILT FROM SCRATCH 🍎 */
+
+/* Main Apple Intelligence Chat Panel */
+.apple-intelligence-panel {
+  position: fixed;
+  width: 340px;
+  height: auto;
+  min-height: 280px;
+  max-height: 500px;
+  background: rgba(242, 242, 247, 0.78);
+  backdrop-filter: blur(40px) saturate(180%);
+  border-radius: 20px;
+  border: 0.5px solid rgba(0, 0, 0, 0.04);
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.15),
+    0 8px 25px rgba(0, 0, 0, 0.08),
+    0 0 0 0.5px rgba(255, 255, 255, 0.6) inset;
+  z-index: 2147483648;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', system-ui, sans-serif;
+  opacity: 0;
+  transform: scale(0.88) translateY(12px);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  pointer-events: auto;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.apple-intelligence-panel.visible {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+/* Header with Apple Intelligence branding */
+.ai-header {
+  padding: 16px 20px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(180deg, 
+    rgba(255, 255, 255, 0.4) 0%, 
+    rgba(255, 255, 255, 0.1) 100%);
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.06);
+  position: relative;
+}
+
+.ai-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.85);
+  letter-spacing: -0.2px;
+}
+
+.ai-icon {
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(135deg, #007AFF 0%, #5856D6 100%);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: white;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0, 122, 255, 0.25);
+}
+
+.ai-close {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(120, 120, 128, 0.16);
+  border: none;
+  color: rgba(60, 60, 67, 0.6);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(10px);
+}
+
+.ai-close:hover {
+  background: rgba(120, 120, 128, 0.24);
+  color: rgba(60, 60, 67, 0.8);
+  transform: scale(1.05);
+}
+
+/* Messages Container */
+.ai-messages {
+  flex: 1;
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow-y: auto;
+  max-height: 300px;
+  scroll-behavior: smooth;
+}
+
+.ai-messages::-webkit-scrollbar {
+  width: 4px;
+}
+
+.ai-messages::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.ai-messages::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+}
+
+/* Message Bubbles */
+.ai-message {
+  max-width: 85%;
+  padding: 10px 14px;
+  border-radius: 18px;
+  font-size: 14px;
+  line-height: 1.4;
+  font-weight: 400;
+  word-wrap: break-word;
+  animation: messageAppear 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+}
+
+@keyframes messageAppear {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.ai-message.user {
+  align-self: flex-end;
+  background: rgba(0, 122, 255, 0.15);
+  backdrop-filter: blur(20px) saturate(150%);
+  color: rgba(255, 255, 255, 0.95);
+  border: 0.5px solid rgba(0, 122, 255, 0.2);
+  border-bottom-right-radius: 6px;
+  box-shadow: 0 2px 12px rgba(0, 122, 255, 0.15);
+}
+
+.ai-message.assistant {
+  align-self: flex-start;
+  background: rgba(120, 120, 128, 0.12);
+  color: rgba(0, 0, 0, 0.85);
+  border-bottom-left-radius: 6px;
+}
+
+.ai-message.streaming::after {
+  content: '●';
+  animation: pulse 1.4s ease-in-out infinite;
+  color: #007AFF;
+  margin-left: 4px;
+  font-size: 12px;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+/* Input Area */
+.ai-input-area {
+  padding: 12px 20px 16px;
+  background: linear-gradient(180deg, 
+    rgba(255, 255, 255, 0.1) 0%, 
+    rgba(255, 255, 255, 0.4) 100%);
+  border-top: 0.5px solid rgba(0, 0, 0, 0.06);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ai-input {
+  flex: 1;
+  background: rgba(120, 120, 128, 0.12);
+  border: 0.5px solid rgba(0, 0, 0, 0.04);
+  border-radius: 20px;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-family: inherit;
+  color: rgba(0, 0, 0, 0.85);
+  outline: none;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(10px);
+}
+
+.ai-input::placeholder {
+  color: rgba(60, 60, 67, 0.6);
+  font-weight: 400;
+}
+
+.ai-input:focus {
+  background: rgba(120, 120, 128, 0.16);
+  border-color: rgba(0, 122, 255, 0.3);
+  box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+}
+
+.ai-send {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #007AFF;
+  border: none;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 122, 255, 0.3);
+}
+
+.ai-send:hover {
+  background: #0056CC;
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 122, 255, 0.4);
+}
+
+.ai-send:active {
+  transform: scale(0.95);
+}
+
+.ai-send:disabled {
+  background: rgba(120, 120, 128, 0.3);
+  color: rgba(60, 60, 67, 0.3);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Status Indicator */
+.ai-status {
+  padding: 8px 20px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(60, 60, 67, 0.6);
+  background: rgba(255, 255, 255, 0.2);
+  border-top: 0.5px solid rgba(0, 0, 0, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.ai-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #34C759;
+  animation: statusPulse 2s ease-in-out infinite;
+}
+
+.ai-status.connecting .ai-status-dot {
+  background: #FF9500;
+}
+
+.ai-status.error .ai-status-dot {
+  background: #FF3B30;
+  animation: statusError 1s ease-in-out infinite;
+}
+
+@keyframes statusPulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+@keyframes statusError {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.3); }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .apple-intelligence-panel {
+    background: rgba(28, 28, 30, 0.78);
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 
+      0 20px 60px rgba(0, 0, 0, 0.4),
+      0 8px 25px rgba(0, 0, 0, 0.2),
+      0 0 0 0.5px rgba(255, 255, 255, 0.1) inset;
+  }
+  
+  .ai-header {
+    background: linear-gradient(180deg, 
+      rgba(255, 255, 255, 0.1) 0%, 
+      rgba(255, 255, 255, 0.03) 100%);
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+  }
+  
+  .ai-title {
+    color: rgba(255, 255, 255, 0.9);
+  }
+  
+  .ai-close {
+    background: rgba(120, 120, 128, 0.24);
+    color: rgba(235, 235, 245, 0.6);
+  }
+  
+  .ai-close:hover {
+    background: rgba(120, 120, 128, 0.32);
+    color: rgba(235, 235, 245, 0.8);
+  }
+  
+  .ai-message.assistant {
+    background: rgba(120, 120, 128, 0.24);
+    color: rgba(255, 255, 255, 0.9);
+  }
+  
+  .ai-input-area {
+    background: linear-gradient(180deg, 
+      rgba(255, 255, 255, 0.03) 0%, 
+      rgba(255, 255, 255, 0.1) 100%);
+    border-top-color: rgba(255, 255, 255, 0.08);
+  }
+  
+  .ai-input {
+    background: rgba(120, 120, 128, 0.24);
+    border-color: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.9);
+  }
+  
+  .ai-input::placeholder {
+    color: rgba(235, 235, 245, 0.6);
+  }
+  
+  .ai-status {
+    background: rgba(255, 255, 255, 0.06);
+    border-top-color: rgba(255, 255, 255, 0.08);
+    color: rgba(235, 235, 245, 0.6);
+  }
+}
